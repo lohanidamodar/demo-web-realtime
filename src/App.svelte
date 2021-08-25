@@ -1,65 +1,62 @@
 <script>
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+  import Column from './lib/components/Column.svelte'
+  import TaskTray from './lib/components/TaskTray.svelte'
+  import './lib/TailwindCSS.svelte'
+
+  let projects
+  let columns = [
+    {
+      id: 'todo',
+      title: 'To do',
+    },
+    {
+      title: 'Doing',
+      id: 'doing',
+    },
+    {
+      title: 'Done',
+      id: 'done',
+    },
+  ]
+
+  function save(event, callback) {}
+
+  function addTask(event) {
+    const { column, task } = event.detail
+  }
+
+  let selection
+  const selectTask = (event) => (selection = event.detail)
+  const deselectTask = (event) => (selection = null)
+
+  function updateTask(event) {
+    const { column, task } = event.detail
+  }
+
+  function removeTask(event) {
+    const { column, id } = event.detail
+  }
+
+  function moveTask(event) {
+    const { column, previousColumn, task } = event.detail
+  }
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello world!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-</main>
-
-<style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
-  }
-</style>
+<div class="h-screen flex flex-row">
+  {#each columns as column, id}
+    <Column
+      {id}
+      {...column}
+      on:taskSelected={selectTask}
+      on:taskAdded={(event) => save(event, addTask)}
+      on:taskDropped={(event) => save(event, moveTask)} />
+  {/each}
+</div>
+{#if selection}
+  <TaskTray
+    on:trayClosed={deselectTask}
+    on:taskUpdated={(event) => save(event, updateTask)}
+    on:taskRemoved={(event) => save(event, removeTask)}
+    {...selection}
+    {columns} />
+{/if}
