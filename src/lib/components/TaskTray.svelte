@@ -3,7 +3,7 @@
   import Button from './Button.svelte'
 
   export let columns
-  export let task
+  export let task = {}
 
   let taskTitle = task.title
   let column = task.column
