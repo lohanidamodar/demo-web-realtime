@@ -31,9 +31,6 @@ class AppwriteService {
         return this.appwrite.database.listDocuments(this.tasksCollection, [], 100, 0, '', '', '', '');
     }
 
-    subscribe = (callback) => {
-        return this.appwrite.subscribe(`collections.${this.tasksCollection}.documents`, callback);
-    }
     logout = () => {
         return this.appwrite.account.deleteSession('current');
     }
