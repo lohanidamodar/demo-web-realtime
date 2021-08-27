@@ -76,9 +76,9 @@
 </script>
 
 {#if $user.$id !== undefined}
-  <div class="bg-red-100 h-20">
+  <div class="bg-gray-700 h-20 flex items-center justify-end">
     <button
-      class="bg-red-500 text-white p-2 rounded-sm mt-2 ml-10"
+      class="bg-gray-900 hover:bg-gray-400 hover:text-gray-900 text-white pl-5 pr-5 p-2 rounded-md mr-10"
       on:click={logout}>
       Logout
     </button>
