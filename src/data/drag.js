@@ -1,3 +1,3 @@
 import { writable } from "svelte/store";
 
-export const drag = new writable({});
+export const drag = writable({});
