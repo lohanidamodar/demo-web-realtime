@@ -33,26 +33,7 @@
   let tasks = []
 
   function subscribe() {
-    appwrite.subscribe((payload) => {
-      switch (payload.event) {
-        case 'database.documents.create':
-          tasks.push(payload.payload)
-          tasks = tasks
-          break
-        case 'database.documents.update':
-          tasks = tasks.map((task) => {
-            if (task.$id === payload.payload.$id) {
-              return payload.payload
-            } else {
-              return task
-            }
-          })
-          break
-        case 'database.documents.delete':
-          tasks = tasks.filter((task) => task.$id !== payload.payload.$id)
-          break
-      }
-    })
+    // update to subscribe to realtime updates
   }
 
   async function listTasks() {
