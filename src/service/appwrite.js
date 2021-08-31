@@ -3,7 +3,7 @@ import { Appwrite } from "aw-test-realtime";
 class AppwriteService {
     tasksCollection = "6125fbedc9814";
     constructor() {
-        this.appwrite = new Appwrite().setEndpoint("http://appwrite.lan/v1").setProject("61236151f0744")
+        this.appwrite = new Appwrite().setEndpoint("https://dlappwrite.realtime.org/v1").setProject("61236151f0744")
     }
 
     addTask = async ({ title, column }, user) => {
