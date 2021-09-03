@@ -1,4 +1,4 @@
-import { Appwrite } from "aw-test-realtime";
+import { Appwrite } from "appwrite";
 
 class AppwriteService {
     tasksCollection = "6131a822d3e6a";

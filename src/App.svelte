@@ -35,6 +35,7 @@ import Info from './lib/components/Info.svelte'
 
   function subscribe() {
     appwrite.subscribeTo((payload) => {
+      console.log(payload);
       switch (payload.event) {
         case 'database.documents.create':
           tasks.push(payload.payload)
