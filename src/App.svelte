@@ -6,6 +6,7 @@
   import { user } from './data/user'
   import Login from './lib/Login.svelte'
   import appwrite from './service/appwrite'
+import Info from './lib/components/Info.svelte'
 
   onMount(async () => {
     const us = await appwrite.getUser()
@@ -33,7 +34,7 @@
   let tasks = []
 
   function subscribe() {
-    appwrite.subscribe((payload) => {
+    appwrite.subscribeTo((payload) => {
       switch (payload.event) {
         case 'database.documents.create':
           tasks.push(payload.payload)
@@ -95,13 +96,16 @@
 </script>
 
 {#if $user.$id !== undefined}
-  <div class="bg-gray-700 h-20 flex items-center justify-end">
+  <div class="bg-white shadow-md h-20 flex items-center">
+    <h1 class="ml-10 font-bold text-xl">Kanban Board</h1>
+    <p class="ml-8">powered by <br /><span class="brand font-bold">Appwrite</span></p>
     <button
-      class="bg-gray-900 hover:bg-gray-400 hover:text-gray-900 text-white pl-5 pr-5 p-2 rounded-md mr-10"
+      class="bg-gray-900 hover:bg-gray-400 hover:text-gray-900 text-white pl-5 pr-5 p-2 rounded-md ml-auto mr-10"
       on:click={logout}>
       Logout
     </button>
   </div>
+  <Info />
   <div class="h-screen flex flex-row">
     {#each columns as column}
       <Column
@@ -123,3 +127,9 @@
 {:else}
   <Login on:click={login} />
 {/if}
+
+<style>
+  .brand {
+    color: #f02e65;
+  }
+</style>

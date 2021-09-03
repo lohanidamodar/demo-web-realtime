@@ -1,9 +1,9 @@
 import { Appwrite } from "aw-test-realtime";
 
 class AppwriteService {
-    tasksCollection = "6125fbedc9814";
+    tasksCollection = "6131a822d3e6a";
     constructor() {
-        this.appwrite = new Appwrite().setEndpoint("https://dlappwrite.realtime.org/v1").setProject("61236151f0744")
+        this.appwrite = new Appwrite().setEndpoint("https://demo.appwrite.io/v1").setProject("6131a81894e2e")
     }
 
     addTask = async ({ title, column }, user) => {
@@ -31,7 +31,7 @@ class AppwriteService {
         return this.appwrite.database.listDocuments(this.tasksCollection, [], 100, 0, '', '', '', '');
     }
 
-    subscribe = (callback) => {
+    subscribeTo = (callback) => {
         return this.appwrite.subscribe(`collections.${this.tasksCollection}.documents`, callback);
     }
     logout = () => {
