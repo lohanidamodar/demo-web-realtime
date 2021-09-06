@@ -27,7 +27,7 @@
   }
 </script>
 
-<div class="w-80 h-4/5 bg-gray-100 overflow-hidden ml-4 mt-2 rounded-lg">
+<div class="w-80 h-full pb-4 bg-gray-100 overflow-hidden ml-4 mt-2 rounded-lg">
   <div class="p-4 flex flex-row justify-between font-bold bg-gray-200 mb-5">
     <div>{title} ({tasks.length})</div>
     <button class="rounded-full hover:bg-red-600 bg-red-400 w-8 h-8 text-white text-2xl" on:click={() => (addingTask = true)}>+</button>

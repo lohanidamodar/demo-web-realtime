@@ -107,7 +107,7 @@ import Info from './lib/components/Info.svelte'
     </button>
   </div>
   <Info />
-  <div class="h-screen flex flex-row">
+  <div class="h-4/5 flex flex-row pb-4">
     {#each columns as column}
       <Column
         {...column}
